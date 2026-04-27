@@ -1,4 +1,20 @@
 {
+  "name": "jasprtailwindclient",
+  "description": "A new Jaspr project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"jaspr serve\" \"npm run dev:css\"",
+    "dev:css": "npx tailwindcss -i ./web/styles.tw.css -o ./web/output.css --watch",
+    "build:css": "npx tailwindcss -i ./web/styles.tw.css -o ./web/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@tailwindcss/cli": "^4.2.4",
     "tailwindcss": "^4.2.4"
