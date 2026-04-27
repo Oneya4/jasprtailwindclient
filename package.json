@@ -1,8 +1,8 @@
 {
   "name": "jasprtailwindclient",
-  "description": "A new Jaspr project",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A new Jaspr project",
+  "main": "main.js",
   "directories": {
     "lib": "lib"
   },
@@ -15,13 +15,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.2.4",
-    "tailwindcss": "^4.2.4"
-  },
   "devDependencies": {
     "autoprefixer": "^10.5.0",
     "concurrently": "^9.2.1",
-    "postcss": "^8.5.12"
+    "postcss": "^8.5.10",
+    "tailwindcss": "^4.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.2"
   }
 }

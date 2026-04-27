@@ -6,6 +6,6 @@ class AboutPage extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-    return section(classes: "text-center", [.text("About")]);
+    return div(classes: "text-center", [.text("About")]);
   }
 }

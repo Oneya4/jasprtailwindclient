@@ -6,6 +6,6 @@ class HomePage extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-    return section(classes: "text-center", [.text("Home")]);
+    return div(classes: "text-center", [.text("Home")]);
   }
 }
