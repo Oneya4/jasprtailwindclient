@@ -2,56 +2,67 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
 
-import 'components/header.dart';
-import 'pages/about.dart';
 import 'pages/home.dart';
+import 'pages/about.dart';
+import 'components/header.dart';
+import 'state/theme_state.dart';
 
-// The main component of your application.
-class App extends StatelessComponent {
+class App extends StatefulComponent {
   const App({super.key});
 
   @override
-  Component build(BuildContext context) {
-    // This method is rerun every time the component is rebuilt.
-    
-    // Renders a <div class="main"> html element with children.
-    return div(classes: 'main', [
-      Router(routes: [
-        ShellRoute(
-          builder: (context, state, child) => .fragment([
-            const Header(),
-            child,
-          ]),
-          routes: [
-            Route(path: '/', title: 'Home', builder: (context, state) => const Home()),
-            Route(path: '/about', title: 'About', builder: (context, state) => const About()),
-          ],
-        ),
-      ]),
-    ]);
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  bool _isDarkMode = true;
+
+  void _toggleTheme(bool value) {
+    setState(() => _isDarkMode = value);
   }
 
-  // Defines the CSS styles for this component.
-  //
-  // By using the @css annotation, these will be rendered automatically to CSS and included in your page.
-  // Must be a variable or getter of type [List<StyleRule>].
-  @css
-  static List<StyleRule> get styles => [
-    css('.main', [
-      // The '&' refers to the parent selector of a nested style rules.
-      css('&').styles(
-        display: .flex,
-        height: 100.vh,
-        flexDirection: .column,
-        flexWrap: .wrap,
+  @override
+  Component build(BuildContext context) {
+    return ThemeState(
+      isDarkMode: _isDarkMode,
+      toggleTheme: _toggleTheme,
+      child: div(
+        classes: 'min-h-screen bg-gray-100 text-gray-900 flex flex-col',
+        [
+          Router(
+            routes: [
+              ShellRoute(
+                builder: (context, state, child) {
+                  final incomingRoute = state.path;
+                  print("Route $incomingRoute");
+
+                  return .fragment([
+                    div(classes: 'fixed top-0 left-0 right-0 z-10', [
+                      const Header(),
+                    ]),
+                    div(classes: 'grow pt-24', [child]),
+                    // Add footer here
+                    // const Footer(),
+                  ]);
+                },
+                routes: [
+                  // Route(
+                  Route(
+                    path: '/',
+                    title: 'Home',
+                    builder: (context, state) => const HomePage(),
+                  ),
+                  Route(
+                    path: '/about',
+                    title: 'About',
+                    builder: (context, state) => const AboutPage(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
-      css('section').styles(
-        display: .flex,
-        flexDirection: .column,
-        justifyContent: .center,
-        alignItems: .center,
-        flex: Flex(grow: 1),
-      ),
-    ]),
-  ];
+    );
+  }
 }
